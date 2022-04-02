@@ -1,0 +1,103 @@
+\documentclass[journal,12pt,two column]{IEEEtran}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage[cmex10]{amsmath}
+\usepackage{amssymb}
+\usepackage{tfrupee}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\title{Assignment 1 (ICSE 2017)}
+\author{Nitya Seshagiri Bhamidipaty (cs21btech11041)}
+\newcommand{\solution}{\noindent \textbf{Solution: }}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item[\textbf{2 (c)}] Jaya borrowed \rupee50,000 for 2 years. The rates of interest for two successive years are 12\% and 15\% respectively. She repays \rupee33,000 at the end of the first year. Find the amount she must pay at the end of the second year to clear her debt.\\
+\solution \\
+The various parameters considered in this problem are listed in Table I.
+\begin{table}[h!]
+\label{table:table1}
+\caption{}
+\begin{tabular}{|c|c|p{4.8cm}|}
+\hline
+\textbf{Symbol} & \textbf{Value} & \textbf{Description}\\
+\hline
+$n$ & 2 & Total number of years over which the debt spans\\
+\hline
+$P$ & \rupee 50,000 & Principal\\
+\hline
+$R_1$ & $12 \% $ & Rate of interest for the $1^{\text{st}}$ year (per annum)\\
+\hline
+$R_2$ & $15 \% $ & Rate of interest for the $2^{\text{nd}}$ year (per annum)\\
+\hline
+$q_1$ & \rupee 33,000 & Amount paid at the end of $1^{\text{st}}$ year\\
+\hline
+$A_n$ & ? & Amount due at the end of $n^{\text{th}}$ year\\
+\hline
+\end{tabular}
+\end{table}
+\\
+Amount due at the end of $1^{\text{st}}$ year
+\begin{equation}
+= P\left(1+\frac{R_1}{100}\right)
+\end{equation}
+The principal for the $2^{\text{nd}}$ year
+\begin{equation}
+     = P\left(1+\frac{R_1}{100}\right) - q_1
+\end{equation}
+Amount due at the end of $2^{\text{nd}}$ year
+\begin{align}
+    &= \left (P\left(1+\frac{R_1}{100}\right) - q_1\right)\left(1 + \frac{R_2}{100}\right)
+\end{align}
+\begin{multline}
+      = P\left(1+\frac{R_1}{100}\right)\left(1+\frac{R_2}{100}\right) \\ - q_1\left(1+\frac{R_2}{100}\right)\label{eq:4}
+\end{multline}
+$\because n = 2$,
+we can directly substitute the values in eq\eqref{eq:4} to get the desired value\\
+Also note that in eq\eqref{eq:4}:
+\begin{enumerate}
+        \item The left term corresponds to $P$ + the interest on $P$
+        \item The right term corresponds to $q_1$ + interest on $q_1$.
+\end{enumerate}
+So for $n$ years, 
+\begin{multline}
+\label{eq:5}
+A_n = P\prod_{k = 1}^{n}{\left(1+\frac{R_k}{100}\right)} -\\ \sum_{i=1}^{n-1}{\left(q_i\prod_{l=i+1}^{n}{\left(1+\frac{R_l}{100}\right)}\right)}
+\end{multline}
+\begin{table}[h!]
+\label{table:table2}
+   \caption{Variables of the eq\eqref{eq:5}}
+    \centering
+    \begin{tabular}{|c|p{5.4cm}|}
+    \hline
+        \textbf{Symbol} & \textbf{Description}  \\
+    \hline
+        $n$ & Total number of years the loan spans over\\
+    \hline
+        $P$ & Principal\\
+    \hline
+        $R_1, R_2, \ldots, R_n$ &  The rate of interests (per annum) corresponding to the $1^\text{st}$, $2^\text{nd}$, \ldots, $n^\text{th}$ year respectively\\
+    \hline
+        $q_i$ & Amount paid at the end of the  $i^\text{th}$ year ( $\forall i\in \{1,2,\ldots,n-1\})$\\
+    \hline
+    \end{tabular}
+    \label{tab:my_label}
+\end{table}\\
+Table II describes all the variables in eq\eqref{eq:5}
+Substituting the values of
+$n$, $P$, $R_1$, $R_2$, $q_1$ in eq\eqref{eq:5} we get
+ \begin{multline}
+    A_2 = 50000 \prod_{k = 1}^{2}  {\left(  1+\frac{R_k}{100}     \right)} \\ - \sum_{i=1}^{1}{\left(q_i\prod_{l=i+1}^{2}{\left(1+\frac{R_l}{100}\right)}\right)}
+\end{multline}
+\begin{multline}
+    A_2 =50000\left(1+\frac{R_1}{100}\right)\left(1+\frac{R_2}{100}\right)\\ - q_1\left(1+\frac{R_2}{100}\right)
+\end{multline}
+\begin{multline}
+       A_2  =50000\left(1+\frac{12}{100}\right)\left(1+\frac{15}{100}\right) \\ - 33000\left(1+\frac{15}{100}\right)
+\end{multline}
+\begin{align}
+   \implies A_2 = 26450
+\end{align}
+Hence, Jaya must pay \rupee26,450 at the end of the second year to clear her debt.
+\end{enumerate}
+\end{document}
