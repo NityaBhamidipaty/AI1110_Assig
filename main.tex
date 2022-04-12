@@ -1,0 +1,68 @@
+\documentclass[journal,12pt,two column]{IEEEtran}
+\usepackage{setspace}
+\usepackage{listings}
+%\singlespacing
+%\usepackage{gensymb}
+\usepackage{enumitem}
+\usepackage[cmex10]{amsmath}
+\usepackage{amssymb}
+\bibliographystyle{IEEEtran}
+%\usepackage{tfrupee}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\title{Assignment 2 (ICSE 2018)}
+\author{Nitya Seshagiri Bhamidipaty (cs21btech11041)}
+\providecommand{\brak}[1]{\ensuremath{\left(#1\right)}}
+\newcommand{\solution}{\noindent \textbf{Solution: }}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item[\textbf{13 (a)}] Evaluate: $\int\frac{x-1}{\sqrt{x^2-x}}dx$\\
+\solution 
+\begin{align}
+    \frac{x-1}{\sqrt{x^2-x}} %&= \frac{\frac{1}{2}(2x-1) - \frac{1}{2}}{\sqrt{x^2-x}}
+    &= \frac{1}{2}\frac{2x-1}{\sqrt{x^2-x}} - \frac{1}{2}\frac{1}{\sqrt{x^2-x}}
+\end{align}
+Integrating both sides
+\begin{multline}
+\int \frac{x-1}{\sqrt{x^2-x}} \, dx = \frac{1}{2}\int\frac{2x-1}{\sqrt{x^2-x}} \, dx \\
+    -  \frac{1}{2}\int\frac{1}{\sqrt{x^2-x}} \, dx
+    \label{eq:3}
+\end{multline}
+Let $t = x^2-x$
+\begin{align}
+    dt = (2x - 1)dx
+    \\
+    \int\frac{2x-1}{\sqrt{x^2-x}} \, dx &= \int\frac{dt}{\sqrt{t}}
+    \\
+    &= 2\sqrt{t}+C
+    \\
+    &= 2\sqrt{x^2-x}+C
+    \label{eq:7}
+    %& \brak{\frac{x^2+x}{x}}
+\end{align}
+Also let $u = x - \frac{1}{2}$
+
+\begin{align}
+    du = dx\\
+    \int\frac{1}{\sqrt{x^2-x}} \, dx &= \int\frac{1}{\sqrt{\brak{x-\frac{1}{2}}^2 - \frac{1}{4}}} \, dx
+    \\
+    &=\int\frac{1}{\sqrt{u^2 - \brak{\frac{1}{2}}^2}} \, du
+    \\
+    &= \ln \left|u + \sqrt{u^2-\brak{\frac{1}{2}}^2}\right| + C
+    \\
+    &= \ln \left|x - \frac{1}{2} + \sqrt{x^2-x}\right|+C
+    \label{eq:12}
+\end{align}
+From eq\eqref{eq:3}, eq\eqref{eq:7}, eq\eqref{eq:12} we get 
+\begin{multline}
+    \int\frac{x-1}{\sqrt{x^2-x}} \, dx = \frac{1}{2}\times2\sqrt{x^2-x} -\\
+    \frac{1}{2} \ln \left|x - \frac{1}{2} + \sqrt{x^2-x}\right| +C
+\end{multline}
+Hence,
+\begin{multline}
+    \int \frac{x-1}{\sqrt{x^2-x}} \, dx = \sqrt{x^2-x} \\- \frac{1}{2}\ln \left|2x-1 + \sqrt{4x^2-4x}\right| + C
+\end{multline}
+
+\end{enumerate}
+\end{document}
