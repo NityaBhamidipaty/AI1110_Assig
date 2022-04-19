@@ -31,5 +31,5 @@ count = 0
 for i in raw_data:
     if i > 0.11:
         count+=1
-#printing the n0. of days conc > 0.11 ppm
+#printing the no. of days conc > 0.11 ppm
 print(count)
