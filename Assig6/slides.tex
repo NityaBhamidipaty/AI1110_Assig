@@ -1,0 +1,114 @@
+\documentclass{beamer}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usetheme{CambridgeUS}
+
+\title{Assignment 6} 
+\author{Nitya Seshagiri Bhamidipaty (CS21BTECH11041)}
+\date{\today}
+\logo{\large \LaTeX{}}
+
+\def\inputGnumericTable{}
+
+\usepackage[latin1]{inputenc}                                 
+\usepackage{color}                                            
+\usepackage{array}                                            
+\usepackage{longtable}                                        
+\usepackage{calc}                                             
+\usepackage{multirow}                                         
+\usepackage{hhline}                                           
+\usepackage{ifthen}
+\usepackage{caption} 
+%\captionsetup[table]{skip=3pt}  
+\providecommand{\brak}[1]{\ensuremath{\left(#1\right)}}
+\providecommand{\pr}[1]{\ensuremath{\Pr\left(#1\right)}}
+\providecommand{\cbrak}[1]{\ensuremath{\left\{#1\right\}}}
+\newcommand*{\permcomb}[4][0mu]{{{}^{#3}\mkern#1#2_{#4}}}
+\newcommand*{\perm}[1][-3mu]{\permcomb[#1]{P}}
+\newcommand*{\comb}[1][-1mu]{\permcomb[#1]{C}}
+
+\begin{document}
+\begin{frame}
+    \titlepage 
+\end{frame}
+\logo{}
+\begin{frame}{Outline}{NCERT Class 12 Example 29}
+    \tableofcontents
+\end{frame}
+\section{Question}
+\begin{frame}{Problem}
+Q) Two cards are drawn simultaneously (or successively without replacement) from a well shuffled pack of 52 cards. Find the mean, variance and standard deviation of the number of kings.
+\end{frame}
+\section{Solution}
+\begin{frame}{Solution}
+    Let the random variable $X \in\{0,1,2\}$ denote 'The number of kings in a draw of two cards'.\\
+    Then,
+    \begin{align}
+        \pr{X = 0} &= \frac{\comb{48}{2}}{\comb{52}{2}} \\
+        &= \frac{\frac{48!}{2!(48-2)!}}{\frac{52!}{2!(52-2)!}}\\
+        &= \frac{188}{221}
+    \end{align}
+    \end{frame}
+\begin{frame}{Solution}
+    \begin{align}
+        \pr{X = 1} &= \frac{\comb{4}{1}\comb{48}{1}}{\comb{52}{2}}\\
+                    &= \frac{32}{221}
+    \end{align}
+    \begin{align}
+        \pr{X = 2} &= \frac{\comb{4}{2}}{\comb{52}{2}}\\
+                    &= \frac{1}{221}
+    \end{align}
+\end{frame}
+
+\begin{frame}{Solution}
+    \begin{table}[h!]
+        \centering
+        \input{tables/table}
+        \caption{Probability Distribution of X}
+        \label{tab:table1}
+    \end{table}
+\end{frame}
+
+\begin{frame}{Graph}
+\begin{figure}
+    \centering
+    \includegraphics[width = 0.7\textwidth]{figures/plot}
+    \caption{PMF and CDF of $X$}
+    \label{fig:figure1}
+\end{figure}
+\end{frame}
+\begin{frame}{Mean of $X$}
+\begin{align}
+\text{Mean of $X$} &=\\
+E(X) &= \sum_{i=1}^nx_ip(x_i)\\
+&= 0\times\frac{188}{221}+1\times\frac{32}{221}+2\times\frac{1}{221}\\
+&= \frac{34}{221}
+\end{align}
+\end{frame}
+\begin{frame}{Variance}
+    \begin{align}
+    E(X^2) &= \sum_{i=1}^{n}x_i^2p(x_i)\\
+    &= 0^2\times\frac{188}{221}+1^2\times\frac{32}{221}+2^2\times\frac{1}{221}\\
+    &= \frac{36}{221}
+\end{align}
+\begin{align}
+    \sigma_x^2 &= E(X^2) - E(X)^2\\
+    &= \frac{36}{221} - \brak{\frac{34}{221}}^2 \\
+    &= \frac{6800}{(221)^2}
+\end{align}
+\end{frame}
+\begin{frame}{Standard Deviation}
+    \begin{align}
+    \sigma_x &= \sqrt{Var(X)} \\
+    &= \frac{\sqrt{6800}}{221}\\
+    &= 0.37
+\end{align}
+\end{frame}
+\section{Code}
+\begin{frame}{Code}
+Download all codes from
+\begin{block}{Python}
+         Download python code from - \href{https://github.com/NityaBhamidipaty/AI1110_Assig/tree/main/Assig6/codes}{Python}
+    \end{block}
+\end{frame}
+\end{document}
