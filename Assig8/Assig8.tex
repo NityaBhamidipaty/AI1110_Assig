@@ -1,0 +1,137 @@
+\documentclass{beamer}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usetheme{CambridgeUS}
+
+\title{Assignment 8} 
+\author{Nitya Seshagiri Bhamidipaty (CS21BTECH11041)}
+\date{\today}
+\logo{\large \LaTeX{}}
+
+\def\inputGnumericTable{}
+
+\usepackage[latin1]{inputenc}                                 
+\usepackage{color}                                            
+\usepackage{array}                                            
+\usepackage{longtable}                                        
+\usepackage{calc}                                             
+\usepackage{multirow}                                         
+\usepackage{hhline}                                           
+\usepackage{ifthen}
+\usepackage{caption} 
+%\captionsetup[table]{skip=3pt}  
+\providecommand{\brak}[1]{\ensuremath{\left(#1\right)}}
+\providecommand{\pr}[1]{\ensuremath{\Pr\left(#1\right)}}
+\providecommand{\cbrak}[1]{\ensuremath{\left\{#1\right\}}}
+\newcommand*{\permcomb}[4][0mu]{{{}^{#3}\mkern#1#2_{#4}}}
+\newcommand*{\perm}[1][-3mu]{\permcomb[#1]{P}}
+\newcommand*{\comb}[1][-1mu]{\permcomb[#1]{C}}
+
+\begin{document}
+\begin{frame}
+    \titlepage 
+\end{frame}
+\logo{}
+\begin{frame}{Outline}{Papoulis Chapter 6 30}
+    \tableofcontents
+\end{frame}
+\section{Question}
+\begin{frame}{Problem}
+Let $X$ and $Y$ be independent random variables with common p.d.f $f_X(x) = \beta^{-\alpha}\alpha x^{\alpha-1}$, $0 < X < \beta$, and zero otherwise ($\alpha \ge 1$). Let $Z = \text{min}(X,Y)$ and $W=\text{max}(X,Y)$.
+(a) Find the p.d.f. of $X+Y$. (b) Find the joint p.d.f. of $Z$ and $W$. (c) Show that $\frac{Z}{W}$ and $W$ are independent random variables.
+\end{frame}
+\section{Solution}
+\begin{frame}{Solution (a)}
+Let 
+\begin{align}
+    U &= X + Y &, 0 < u < 2\beta
+\end{align}
+for $0 < u \le \beta$, we have
+\begin{align}
+    F_U(u) &= \int_0^u\int_0^{u-x}f_{XY}(x,y)\,dydx
+\end{align}
+which gives 
+\begin{align}
+    f_U(u) &= \int_0^uf_{XY}(x,u-x)\,dx \\
+    &= \int_0^u f_X(x)f_Y(u-x)\,dx\\
+    &= \alpha^2\beta^{-2\alpha}\int_0^ux^{\alpha-1}(u-x)^{\alpha -1}\,dx\\
+    &= \alpha^2\beta^{-2\alpha}u^{2\alpha-1}\int_0^1y^{\alpha-1}(1-y)^{\alpha-1}\, dy
+\end{align}
+\end{frame}
+\begin{frame}{Solution (a)}
+    Similarly for $\beta < u \le 2\beta$, we get
+    \begin{align}
+        F_U(u) &= 1 - \int_{u-\beta}^\beta\int_{u-x}^\beta f_{XY}(x,y)\, dydx
+    \end{align}
+    Hence
+    \begin{align}
+        f_U(u) &= \int_{u-\beta}^\beta f_{XY}(x,u-x)\,dx \\
+        &= \alpha^2\beta^{-2\alpha}\int_{u-\beta}^{\beta}x^{\alpha-1}(u-x)^{\alpha-1}\, dx\\
+        &= \alpha^2\beta^{-2\alpha}u^{2\alpha-1}\int_{1-\frac{\beta}{u}}^{\frac{\beta}{u}}y^{\alpha-1}(1-y)^{\alpha-1}\,dy & \beta < u \le 2\beta
+    \end{align}
+\end{frame}
+\begin{frame}{Solution (b)}
+Given
+\begin{align}
+    Z &= \text{min}(X,Y) ,W = max(X,Y)\\
+    F_{ZW}(z,w) &= \begin{cases}
+                    F_{XY}(z,w) + F_{XY}(w,z) - F_{XY}(z,z) & w\ge z\\
+                    F_{XY}(w,w) & w < z
+                    \end{cases}\\
+    \implies f_{ZW}(z,w) &= f_X(z)f_Y(w) + f_X(w)f_Y(z) \text{   } 0<z\lew<\beta\\
+    f_{ZW}(z,w) &= \begin{cases}
+                    2\alpha^2\beta^{-2\alpha}z^{\alpha-1}w^{\alpha-1} & 0<z\le\beta\\
+                    0 & \text{otherwise}
+                    \end{cases}
+\end{align}
+\end{frame}
+\begin{frame}{Solution (c)}
+Let 
+\begin{align}
+    V &= \frac{Z}{W} = \frac{\text{min}(X,Y)}{\text{max}(X,Y)}\\
+    &= \begin{cases}
+    \frac{Y}{X} & X\ge Y\\
+    \frac{X}{Y} & X < Y
+    \end{cases}
+\end{align}
+and
+\begin{align}
+    W &= \text{max}(X,Y)\\
+    &= \begin{cases}
+    X & X \ge Y\\
+    Y & X < Y
+    \end{cases}
+\end{align}
+\end{frame}
+\begin{frame}{Solution (c)}
+For $0<v<1$, $0<w<\beta$
+\begin{align}
+    F_{VW} &= P(V\le v,W\le w)\\
+    &= P(V \le v,W \le w, (X \ge Y)\cup(X < Y))\\
+    &= P(Y \le Xv, X \le w, X \ge Y) + P(X < Yv, Y \le w, X < Y)\\
+    &= \int_0^w\int_0^{xv}f_{XY}(x,y)dydx + \int_0^w\int_0^{yw}f_{XY}(x,y)dxdy
+\end{align}
+\end{frame}
+\begin{frame}
+\begin{align}
+    f_{VW}(v,w) &= \frac{\partial^2F_{VW}(v,w)}{\partial v\partial w}\\
+    &= \frac{\partial}{\partial v}\cbrak{\int_0^{vw}f_{XY}(w,y)dy + \int_0^{vw}f_{XY}(x,w)dx}\\
+    &= w{f_{XY}(w,vw)+f_{XY}(vw,w)}\\
+    &= 2\alpha^2\beta^{-2\alpha}w^{2\alpha-1}v^{\alpha-1} \text{  } 0<v<1,0<w<\beta  
+\end{align}
+\end{frame}
+Hence,
+\begin{align}
+    f_V(v) &= \int_0^\beta f_{VW}(v,w)dw \\
+    &= \alpha v^{\alpha-1} & 0<v<1
+\end{align}
+\begin{align}
+    f_W(w) &= \int_0^1f_{VW}(v,w)dv\\
+    &= 2\alpha\beta^{-2\alpha}w^{2\alpha-1} & 0<w<\beta
+\end{align}
+Hence,
+\begin{align}
+    f_{VW}(V,W) &= f_V(v)f_W(w)
+\end{align}
+Thus $V$ and $W$ are independent random variables.
+\end{document}
