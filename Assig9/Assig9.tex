@@ -1,0 +1,89 @@
+\documentclass{beamer}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usetheme{CambridgeUS}
+
+\title{Assignment 9} 
+\author{Nitya Seshagiri Bhamidipaty (CS21BTECH11041)}
+\date{\today}
+\logo{\large \LaTeX{}}
+
+\def\inputGnumericTable{}
+
+\usepackage[latin1]{inputenc}                                 
+\usepackage{color}                                            
+\usepackage{array}                                            
+\usepackage{longtable}                                        
+\usepackage{calc}                                             
+\usepackage{multirow}                                         
+\usepackage{hhline}                                           
+\usepackage{ifthen}
+\usepackage{caption} 
+%\captionsetup[table]{skip=3pt}  
+\providecommand{\brak}[1]{\ensuremath{\left(#1\right)}}
+\providecommand{\pr}[1]{\ensuremath{\Pr\left(#1\right)}}
+\providecommand{\cbrak}[1]{\ensuremath{\left\{#1\right\}}}
+\newcommand*{\permcomb}[4][0mu]{{{}^{#3}\mkern#1#2_{#4}}}
+\newcommand*{\perm}[1][-3mu]{\permcomb[#1]{P}}
+\newcommand*{\comb}[1][-1mu]{\permcomb[#1]{C}}
+
+\begin{document}
+\begin{frame}
+    \titlepage 
+\end{frame}
+\logo{}
+\begin{frame}{Outline}{Papoulis Chapter 7 16}
+    \tableofcontents
+\end{frame}
+\section{Question}
+\begin{frame}{Problem}
+Given $n$ independent $N(\eta_i,1)$ random variables $Z_i$, we form the random variable $W = Z_1^2+...+Z_n^2$. This random variable is called a noncentral chi-square with $n$ degrees of freedom and eccentricity $e = \eta_1^2 + ... + \eta_n^2$. Show that its moment generating function equals 
+\begin{align}
+    \Phi_w(s) = \frac{1}{\sqrt{(1-2s)^n}}exp\cbrak{\frac{es}{1-2s}}
+\end{align}
+\end{frame}
+\section{Solution}
+\begin{frame}{Solution}
+\begin{align}
+    \Phi_W(s) &= E(e^{sW})\\
+    &=E(e^{s\sum_iZ_i^2})\\
+    &= E\brak{\Pi_ie^{sZ_i^2}}
+    \end{align}
+    Since $Z_i$(s) are independent
+    \begin{align}
+    \label{eq:eq5}
+        \Phi_W(s) &= \Pi_iE(e^{sZ_i^2})
+    \end{align}
+\end{frame}
+\begin{frame}
+\begin{align}
+    E(e^{sZ_i^2}) &= \int_{-\infty}^{\infty} e^{sZ_i^2} f_{Z_i}(z)\,dz\\
+    &= \int_{-\infty}^{\infty} e^{sZ_i^2}\frac{1}{\sqrt{2\pi}}e^{-\frac{(z-\eta_i)^2}{2}}\,dz\\
+    &= \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}exp\cbrak{-\brak{\sqrt{\frac{1-2s}{2}}z-\frac{\eta_i}{\sqrt{2(1-2s)}}}^2}e^{\frac{\eta_i^2s}{1-2s}}\,dz\\
+\end{align}
+Let 
+\begin{align}
+    u &= \sqrt{\frac{1-2s}{2}}z-\frac{\eta_i}{\sqrt{2(1-2s)}}\\
+    du &= \sqrt{\frac{1-2s}{2}}dz
+\end{align}
+\end{frame}
+\begin{frame}
+Substituting we get
+\begin{align}
+     E(e^{sZ_i^2}) &= \int_{-\infty}^\infty\frac{e^{\frac{\eta_i^2s}{1-2s}}}{\sqrt{2\pi}}e^{-u^2}\sqrt{\frac{2}{1-2s}}\, du\\
+     &= \frac{e^{\frac{\eta_i^2s}{1-2s}}}{\sqrt{2\pi}}\sqrt{\frac{2}{1-2s}}\sqrt{\pi}\\
+     &= e^{\frac{\eta_i^2s}{1-2s}}\sqrt{\frac{1}{1-2s}}\\
+\end{align}
+\end{frame}
+\begin{frame}
+Substituting in \eqref{eq:eq5}, we get
+\begin{align}
+      \Phi_W(s) &= \Pi_iE(e^{sZ_i^2})\\
+      &= \Pi_i exp\cbrak{\frac{\eta_i^2 s}{1-2s}}\frac{1}{\sqrt{1-2s}}\\
+      &= exp\cbrak{\frac{\sum_i\eta_i^2 s}{1-2s}}\frac{1}{\sqrt{(1-2s)^n}}\\
+      &= exp\cbrak{\frac{e s}{1-2s}}\frac{1}{\sqrt{(1-2s)^n}}\\
+      &= RHS
+\end{align}
+Hence, proved.
+\end{frame}
+\end{document}
